@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmed</title>
+
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f3f4f6;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      .wrapper {
+        width: 100%;
+        padding: 24px 12px;
+      }
+      .card {
+        max-width: 620px;
+        margin: auto;
+        background: #ffffff;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+      .hero {
+        padding: 32px;
+        text-align: center;
+      }
+      .logo {
+        width: 500px;
+        height: 120px;
+        margin-bottom: 1px;
+        margin-top: 1px;
+        object-fit: cover;
+        object-position: center;
+      }
+      .title {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 10px 0;
+      }
+      .text {
+        color: #666;
+        line-height: 1.6;
+        font-size: 15px;
+      }
+      .info {
+        margin: 24px 0;
+        background: #f5f5f7;
+        border-radius: 16px;
+        padding: 18px;
+        text-align: left;
+      }
+      .info div {
+        padding: 6px 0;
+      }
+      .label {
+        color: #888;
+        font-size: 13px;
+      }
+      .value {
+        font-weight: 600;
+        color: #111;
+      }
+      .button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 14px 24px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .route {
+        margin: 24px 0;
+        background: #f5f5f7;
+        border-radius: 16px;
+        padding: 18px;
+        text-align: center;
+      }
+      .items-section {
+        margin: 24px 0;
+        background: #f5f5f7;
+        border-radius: 16px;
+        padding: 18px;
+      }
+      .items-title {
+        font-weight: 600;
+        color: #111;
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+      .items-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .item {
+        padding: 10px;
+        background: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+        border: 1px solid #e5e5e7;
+      }
+      .item-icon {
+        font-size: 32px;
+        margin-bottom: 6px;
+      }
+      .item-name {
+        font-size: 12px;
+        font-weight: 500;
+        color: #111;
+      }
+      .location {
+        display: inline-block;
+        text-align: center;
+        padding: 0 15px;
+      }
+      .location-icon {
+        font-size: 24px;
+        margin-right: 4px;
+      }
+      .location-label {
+        display: none;
+      }
+      .location-value {
+        font-weight: 600;
+        color: #111;
+        font-size: 14px;
+        display: inline;
+      }
+      .route-arrow {
+        display: inline-block;
+        font-size: 20px;
+        margin: 0 10px;
+        vertical-align: middle;
+      }
+      .timeline {
+        margin: 24px 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%);
+        border-radius: 16px;
+      }
+      .timeline-stages {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+      }
+      .timeline-progress-bar {
+        position: absolute;
+        height: 2px;
+        background: #d0d0d5;
+        top: 20px;
+        left: 0;
+        right: 0;
+        z-index: 0;
+      }
+      .timeline-progress-fill {
+        position: absolute;
+        height: 2px;
+        background: #34c759;
+        top: 20px;
+        left: 0;
+        width: 0%;
+        z-index: 1;
+        transition: width 0.3s ease;
+      }
+      .timeline-stage {
+        flex: 1;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+      .stage-dot {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 3px solid #d0d0d5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        transition: all 0.3s ease;
+      }
+      .stage-dot.active {
+        background: #34c759;
+        border-color: #34c759;
+        box-shadow: 0 0 15px rgba(52, 199, 89, 0.3);
+      }
+      .stage-label {
+        font-size: 12px;
+        color: #888;
+        font-weight: 600;
+        margin-top: 8px;
+      }
+      .stage-label.active {
+        color: #34c759;
+      }
+      .footer {
+        border-top: 1px solid #eee;
+        padding: 20px;
+        text-align: center;
+        color: #999;
+        font-size: 12px;
+      }
+      @media only screen and (max-width: 600px) {
+        .hero {
+          padding: 22px;
+        }
+        .title {
+          font-size: 24px;
+        }
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #000 !important;
+        }
+        .card {
+          background: #1c1c1e !important;
+          box-shadow: none !important;
+        }
+        .title {
+          color: #fff !important;
+        }
+        .text {
+          color: #c7c7cc !important;
+        }
+        .info {
+          background: #2c2c2e !important;
+        }
+        .label {
+          color: #98989f !important;
+        }
+        .value {
+          color: #fff !important;
+        }
+        .footer {
+          border-top: 1px solid #3a3a3c !important;
+          color: #8e8e93 !important;
+        }
+        .route {
+          background: #2c2c2e !important;
+        }
+        .items-section {
+          background: #2c2c2e !important;
+        }
+        .items-title {
+          color: #fff !important;
+        }
+        .item {
+          background: #1c1c1e !important;
+          border-color: #3a3a3c !important;
+        }
+        .item-name {
+          color: #fff !important;
+        }
+        .location-label {
+          color: #98989f !important;
+        }
+        .location-value {
+          color: #fff !important;
+        }
+        .timeline {
+          background: linear-gradient(135deg, #2c2c2e 0%, #1c1c1e 100%) !important;
+        }
+        .timeline-progress-bar {
+          background: #3a3a3c !important;
+        }
+        .stage-dot {
+          background: #2c2c2e !important;
+          border-color: #3a3a3c !important;
+        }
+        .stage-dot.active {
+          background: #34c759 !important;
+          border-color: #34c759 !important;
+        }
+        .stage-label {
+          color: #98989f !important;
+        }
+        .stage-label.active {
+          color: #34c759 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="card">
+        <div class="hero">
+          <img class="logo" src="max.jpg" alt="Maximus Logo" />
+
+          <div style="font-size: 54px">📦</div>
+
+          <div class="title" style="color: #007aff">Order Confirmed</div>
+
+          <div class="text">
+            Hi Sarah, this is an automated shipment update from Maximus
+            Logistics. 🎉
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-stages">
+              <div class="timeline-progress-bar"></div>
+              <div class="timeline-progress-fill" style="width: 0%;"></div>
+              <div class="timeline-stage">
+                <div class="stage-dot active">📦</div>
+                <div class="stage-label active">Order Confirmed</div>
+              </div>
+              <div class="timeline-stage">
+                <div class="stage-dot">🚚</div>
+                <div class="stage-label">On The Way</div>
+              </div>
+              <div class="timeline-stage">
+                <div class="stage-dot">✅</div>
+                <div class="stage-label">Delivered</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info">
+            <div>
+              <div class="label">Tracking Number</div>
+              <div class="value">TRK1847293847</div>
+            </div>
+            <div>
+              <div class="label">Order ID</div>
+              <div class="value">ORD-8472</div>
+            </div>
+            <div>
+              <div class="label">Estimated Delivery</div>
+              <div class="value">2026-05-18</div>
+            </div>
+          </div>
+
+          <div class="items-section">
+            <div class="items-title">📦 Items Shipped</div>
+            <div class="items-grid">
+              <div class="item">
+                <div class="item-icon">💻</div>
+                <div class="item-name">Laptop Pro 16"</div>
+              </div>
+              <div class="item">
+                <div class="item-icon">⌨️</div>
+                <div class="item-name">Mechanical Keyboard</div>
+              </div>
+              <div class="item">
+                <div class="item-icon">🖱️</div>
+                <div class="item-name">Wireless Mouse</div>
+              </div>
+              <div class="item">
+                <div class="item-icon">🔌</div>
+                <div class="item-name">Docking Station</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="route">
+            <div class="location">
+              <span class="location-icon">📍</span>
+              <span class="location-value">Toronto, ON</span>
+            </div>
+            <div class="route-arrow">→</div>
+            <div class="location">
+              <span class="location-icon">📍</span>
+              <span class="location-value">Vancouver, BC</span>
+            </div>
+          </div>
+
+          <a href="{{trackingUrl}}" class="button" style="background: #007aff; color: white"
+            >Track Package</a
+          >
+        </div>
+
+        <div class="footer">
+          Maximus Service Desk • ITSupport@maximus.ca<br />
+          123 Business Avenue • Toronto, ON
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maximus Logistics - Notification Demo</title>
+
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 60px;
+        color: white;
+      }
+
+      .logo-section {
+        margin-bottom: 30px;
+      }
+
+      .logo-section img {
+        width: 150px;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        font-size: 48px;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .header p {
+        font-size: 18px;
+        opacity: 0.95;
+        line-height: 1.6;
+      }
+
+      .notifications-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .notification-card {
+        background: white;
+        border-radius: 16px;
+        padding: 40px 30px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent;
+      }
+
+      .notification-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: #667eea;
+      }
+
+      .card-icon {
+        font-size: 64px;
+        margin-bottom: 20px;
+      }
+
+      .card-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #111;
+      }
+
+      .card-description {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .card-status {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .status-confirmed {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .status-onway {
+        background: #fff3e0;
+        color: #e65100;
+      }
+
+      .status-delivered {
+        background: #f3e5f5;
+        color: #6a1b9a;
+      }
+
+      .status-action {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .card-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .notification-card:hover .card-button {
+        transform: scale(1.05);
+      }
+
+      .footer {
+        text-align: center;
+        color: white;
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      .footer p {
+        opacity: 0.9;
+        font-size: 14px;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 36px;
+        }
+
+        .notifications-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .notification-card {
+          padding: 30px 20px;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+
+        .notification-card {
+          background: #1c1c1e;
+          color: white;
+        }
+
+        .card-title {
+          color: #fff;
+        }
+
+        .card-description {
+          color: #a0a0a0;
+        }
+
+        .footer p {
+          opacity: 0.8;
+        }
+      }
+
+      .demo-info {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 20px;
+        color: white;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .demo-info p {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.95;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-section">
+          <img src="max.jpg" alt="Maximus Logo" />
+        </div>
+        <h1>Notification System Demo</h1>
+        <p>
+          Explore our modern email notification templates for logistics
+          shipments
+        </p>
+      </div>
+
+      <div class="demo-info">
+        <p>
+          🚀 Click on any notification type below to view the email template
+        </p>
+      </div>
+
+      <div class="notifications-grid">
+        <a href="confirmed.html" class="notification-card">
+          <div class="card-icon">📦</div>
+          <div class="card-title">Order Confirmed</div>
+          <div class="card-status status-confirmed">INITIAL STAGE</div>
+          <div class="card-description">
+            Customer receives confirmation that their order has been placed and
+            is being prepared for shipment.
+          </div>
+          <button class="card-button">View Template</button>
+        </a>
+
+        <a href="Onway.html" class="notification-card">
+          <div class="card-icon">🚚</div>
+          <div class="card-title">Shipment On The Way</div>
+          <div class="card-status status-onway">IN TRANSIT</div>
+          <div class="card-description">
+            Real-time update that the package is out for delivery and on its way
+            to the customer's address.
+          </div>
+          <button class="card-button">View Template</button>
+        </a>
+
+        <a href="Delivered.html" class="notification-card">
+          <div class="card-icon">✅</div>
+          <div class="card-title">Delivered Successfully</div>
+          <div class="card-status status-delivered">COMPLETED</div>
+          <div class="card-description">
+            Confirmation that the package has been successfully delivered to the
+            customer with celebration message.
+          </div>
+          <button class="card-button">View Template</button>
+        </a>
+
+        <a href="action.html" class="notification-card">
+          <div class="card-icon">⚠️</div>
+          <div class="card-title">Action Required</div>
+          <div class="card-status status-action">ATTENTION NEEDED</div>
+          <div class="card-description">
+            Alert notification when there are address concerns or issues that
+            require customer attention.
+          </div>
+          <button class="card-button">View Template</button>
+        </a>
+      </div>
+
+      <div class="footer">
+        <p>
+          📧 Maximus Logistics Email Notification System • Powered by GitHub
+          Pages
+        </p>
+        <p style="margin-top: 10px; opacity: 0.8; font-size: 12px">
+          © 2026 Maximus Logistics. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
